@@ -3,14 +3,58 @@ const express = require('express'),
 
 const app = express();
 
-app.use(morgan('common'));
+let topMovies = [
+  {
+    title: 'Dirty Dancing',
+    author: 'Emile Ardolino'
+  },
+  {
+    title: 'Science of Sleep',
+    author: 'Michel Gondry'
+  },
+  {
+    title: 'Midsommar',
+    author: 'Ari Aster'
+  },
+  {
+    title: 'Get Out',
+    author: 'Jordan Peele'
+  },
+  {
+    title: 'The Little Mermaid',
+    author: 'John Musker and Ron Clements'
+  },
+  {
+    title: 'The Lobster',
+    author: 'Yorgos Lanthimos'
+  },
+  {
+    title: 'Pappa Ante Portas',
+    author: 'Vicco von B&uuml;low'
+  },
+  {
+    title: 'The Neon Demon',
+    author: 'Nicolas Winding Refn'
+  },
+  {
+    title: 'Up',
+    author: 'Pete Docter'
+  },
+  {
+    title: 'Lost In Translation',
+    author: 'Sofia Coppola'
+  },
+];
 
+// app.use(morgan('common'));
+
+// GET requests
 app.get('/', (req, res) => {
-  res.send('Welcome to my app!');
+  res.send('Welcome to my Movie database');
 });
 
-app.get('/secreturl', (req, res) => {
-  res.send('This is a secret url with super top-secret content.');
+app.get('/movies', (req, res) => {
+  res.json(topMovies);
 });
 
 // listen for requests
