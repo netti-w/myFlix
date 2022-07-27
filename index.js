@@ -6,6 +6,7 @@ const app = express();
 // Morgan middleware logging requests
 app.use(morgan('common'));
 
+// function serving all requests of static file (here:"documenation.html") from public folder
 app.use(express.static('public'));
 
 let topMovies = [
