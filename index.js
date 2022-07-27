@@ -3,6 +3,7 @@ const express = require('express'),
 
 const app = express();
 
+app.use(morgan('common'));
 app.use(express.static('public'));
 
 let topMovies = [
@@ -47,8 +48,6 @@ let topMovies = [
     author: 'Sofia Coppola'
   },
 ];
-
-// app.use(morgan('common'));
 
 // GET requests
 app.get('/', (req, res) => {
