@@ -12,43 +12,43 @@ app.use(express.static('public'));
 let topMovies = [
   {
     title: 'Dirty Dancing',
-    author: 'Emile Ardolino'
+    director: 'Emile Ardolino'
   },
   {
     title: 'Science of Sleep',
-    author: 'Michel Gondry'
+    director: 'Michel Gondry'
   },
   {
     title: 'Midsommar',
-    author: 'Ari Aster'
+    director: 'Ari Aster'
   },
   {
     title: 'Get Out',
-    author: 'Jordan Peele'
+    director: 'Jordan Peele'
   },
   {
     title: 'The Little Mermaid',
-    author: 'John Musker and Ron Clements'
+    director: 'John Musker and Ron Clements'
   },
   {
     title: 'The Lobster',
-    author: 'Yorgos Lanthimos'
+    director: 'Yorgos Lanthimos'
   },
   {
     title: 'Pappa Ante Portas',
-    author: 'Vicco von B&uuml;low'
+    director: 'Vicco von B&uuml;low'
   },
   {
     title: 'The Neon Demon',
-    author: 'Nicolas Winding Refn'
+    director: 'Nicolas Winding Refn'
   },
   {
     title: 'Up',
-    author: 'Pete Docter'
+    director: 'Pete Docter'
   },
   {
     title: 'Lost In Translation',
-    author: 'Sofia Coppola'
+    director: 'Sofia Coppola'
   },
 ];
 
