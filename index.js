@@ -1,5 +1,7 @@
 const express = require('express'),
-  morgan = require('morgan');
+  morgan = require('morgan'),
+  bodyParser = require('body-parser'),
+  uuid = require('uuid');
 
 const app = express();
 
@@ -8,6 +10,9 @@ app.use(morgan('common'));
 
 // function serving all requests of static file (here:"documenation.html") from public folder
 app.use(express.static('public'));
+
+// Body parser middleware passing data as JSON
+app.use(bodyParser.json());
 
 let movies = [
   {
