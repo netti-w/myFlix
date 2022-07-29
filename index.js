@@ -16,6 +16,7 @@ let movies = [
     writers: ['Eleanor Bergstein'],
     year: 1987,
     genre: 'Drama',
+    decription:'Spending the summer at a Catskills resort with her family, Frances "Baby" Houseman falls in love with the camp\'s dance instructor, Johnny Castle.',
     stars: [
       'Patrick Swayze',
       'Jennifer Grey',
@@ -27,7 +28,8 @@ let movies = [
     director: 'Michel Gondry',
     writers: 'Michel Gondry',
     year: 2006,
-    genre: 'Comedy, Drama',
+    genre: 'Comedy',
+    decription:'A man entranced by his dreams and imagination is love-struck with a French woman and feels he can show her his world.',
     stars: [
     'Gael García Bernal',
     'Charlotte Gainsbourg',
@@ -40,6 +42,7 @@ let movies = [
     writers: 'Ari Aster',
     year: '2019',
     genre: 'Horror',
+    decription:'A couple travels to Northern Europe to visit a rural hometown\'s fabled Swedish mid-summer festival. What begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult.',
     stars: [
       'Florence Pugh',
       'Jack Reynor',
@@ -52,6 +55,7 @@ let movies = [
     writers: 'Jordan Peele',
     year: '2017',
     genre: 'Horror',
+    decription:'A young African-American visits his white girlfriend\'s parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.',
     stars: [
       'Daniel Kaluuya',
       'Allison Williams',
@@ -71,6 +75,7 @@ let movies = [
     ],
     year: 1989,
     genre: 'Animation',
+    decription:'A mermaid princess makes a Faustian bargain in an attempt to become human and win a prince\'s love.',
     stars: [
       'Jodi Benson (voice)',
       'Samuel E. Wright (voice)',
@@ -85,6 +90,7 @@ let movies = [
     ],
     year: '2015',
     genre: 'Drama',
+    decription:'In a dystopian near future, according to the laws of The City, single people are taken to The Hotel, where they are obliged to find a romantic partner in 45 days or they\'re transformed into beasts and sent off into The Woods.',
     stars: [
       'Colin Farrell',
       'Rachel Weisz',
@@ -97,10 +103,11 @@ let movies = [
     writers: 'Vicco von B&uuml;low',
     year: '1991',
     genre: 'Comedy',
+    decription:'After ordering enough typewriting paper for 40 years, just to get discount, Heinrich Lohse is forced to retire. The former manager has plenty of time now to spend with his wife and their 16 year old son. But - do they want that?',
     stars: [
       'Loriot',
       'Evelyn Hamann',
-      'Ortrud Beginnen'
+      'Irm Herrmann'
     ]
   },
   {
@@ -113,6 +120,7 @@ let movies = [
     ],
     year: '2016',
     genre: 'Horror',
+    decription:'An aspiring model, Jesse, is new to Los Angeles. However, her beauty and youth, which generate intense fascination and jealousy within the fashion industry, may prove themselves sinister.',
     stars: [
       'Elle Fanning',
       'Christina Hendricks',
@@ -132,6 +140,7 @@ let movies = [
     ],
     year: '2009',
     genre: 'Animation',
+    decription:'78-year-old Carl Fredricksen travels to Paradise Falls in his house equipped with balloons, inadvertently taking a young stowaway.',
     stars: [
       'Edward Asner (voice)',
       'Jordan Nagai (voice)',
@@ -143,7 +152,8 @@ let movies = [
     director: 'Sofia Coppola',
     writers: 'Sofia Coppola',
     year: '2003',
-    genre: 'Comedy, Drama',
+    genre: 'Comedy',
+    decription:'A faded movie star and a neglected young woman form an unlikely bond after crossing paths in Tokyo.',
     stars: [
       'Bill Murray',
       'Scarlett Johansson',
