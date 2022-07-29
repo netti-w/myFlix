@@ -40,7 +40,7 @@ let movies = [
     title: 'Midsommar',
     director: 'Ari Aster',
     writers: 'Ari Aster',
-    year: '2019',
+    year: 2019,
     genre: 'Horror',
     decription:'A couple travels to Northern Europe to visit a rural hometown\'s fabled Swedish mid-summer festival. What begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult.',
     stars: [
@@ -53,7 +53,7 @@ let movies = [
     title: 'Get Out',
     director: 'Jordan Peele',
     writers: 'Jordan Peele',
-    year: '2017',
+    year: 2017,
     genre: 'Horror',
     decription:'A young African-American visits his white girlfriend\'s parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.',
     stars: [
@@ -80,6 +80,7 @@ let movies = [
       'Jodi Benson (voice)',
       'Samuel E. Wright (voice)',
       'Rene Auberjonois(voice)'
+    ]
   },
   {
     title: 'The Lobster',
@@ -88,7 +89,7 @@ let movies = [
     'Yorgos Lanthimos',
     'Efthymis Filippou'
     ],
-    year: '2015',
+    year: 2015,
     genre: 'Drama',
     decription:'In a dystopian near future, according to the laws of The City, single people are taken to The Hotel, where they are obliged to find a romantic partner in 45 days or they\'re transformed into beasts and sent off into The Woods.',
     stars: [
@@ -101,7 +102,7 @@ let movies = [
     title: 'Pappa Ante Portas',
     director: 'Vicco von B&uuml;low',
     writers: 'Vicco von B&uuml;low',
-    year: '1991',
+    year: 1991,
     genre: 'Comedy',
     decription:'After ordering enough typewriting paper for 40 years, just to get discount, Heinrich Lohse is forced to retire. The former manager has plenty of time now to spend with his wife and their 16 year old son. But - do they want that?',
     stars: [
@@ -118,7 +119,7 @@ let movies = [
       'Mary Laws',
       'Polly Stenham'
     ],
-    year: '2016',
+    year: 2016,
     genre: 'Horror',
     decription:'An aspiring model, Jesse, is new to Los Angeles. However, her beauty and youth, which generate intense fascination and jealousy within the fashion industry, may prove themselves sinister.',
     stars: [
@@ -138,7 +139,7 @@ let movies = [
       'Bob Peterson',
       'Tom McCarthy'
     ],
-    year: '2009',
+    year: 2009,
     genre: 'Animation',
     decription:'78-year-old Carl Fredricksen travels to Paradise Falls in his house equipped with balloons, inadvertently taking a young stowaway.',
     stars: [
@@ -151,7 +152,7 @@ let movies = [
     title: 'Lost In Translation',
     director: 'Sofia Coppola',
     writers: 'Sofia Coppola',
-    year: '2003',
+    year: 2003,
     genre: 'Comedy',
     decription:'A faded movie star and a neglected young woman form an unlikely bond after crossing paths in Tokyo.',
     stars: [
@@ -159,7 +160,7 @@ let movies = [
       'Scarlett Johansson',
       'Giovanni Ribisi'
     ]
-  },
+  }
 ];
 
 // GET requests
@@ -169,7 +170,7 @@ app.get('/', (req, res) => {
 
 
 app.get('/movies', (req, res) => {
-  res.json(topMovies);
+  res.json(movies);
 });
 
 // Error handling middleware logging app level errors
