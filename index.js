@@ -1,6 +1,6 @@
 const express = require('express'),
   morgan = require('morgan'),
-  bodyParser = require('body-parser'),
+  bodyParser = require('body-parser');
   uuid = require('uuid');
 
 const app = express();
@@ -16,9 +16,9 @@ app.use(bodyParser.json());
 
 let movies = [
   {
-    title: 'Dirty Dancing',
+    Title: 'Dirty Dancing',
     director: 'Emile Ardolino',
-    writers: ['Eleanor Bergstein'],
+    writers: 'Eleanor Bergstein',
     year: 1987,
     genre: 'Drama',
     decription:'Spending the summer at a Catskills resort with her family, Frances "Baby" Houseman falls in love with the camp\'s dance instructor, Johnny Castle.',
@@ -29,7 +29,7 @@ let movies = [
     ]
   },
   {
-    title: 'The Science of Sleep',
+    Title: 'The Science of Sleep',
     director: 'Michel Gondry',
     writers: 'Michel Gondry',
     year: 2006,
@@ -42,7 +42,7 @@ let movies = [
     ]
   },
   {
-    title: 'Midsommar',
+    Title: 'Midsommar',
     director: 'Ari Aster',
     writers: 'Ari Aster',
     year: 2019,
@@ -55,7 +55,7 @@ let movies = [
     ]
   },
   {
-    title: 'Get Out',
+    Title: 'Get Out',
     director: 'Jordan Peele',
     writers: 'Jordan Peele',
     year: 2017,
@@ -68,7 +68,7 @@ let movies = [
     ]
   },
   {
-    title: 'The Little Mermaid',
+    Title: 'The Little Mermaid',
     director: [
       'John Musker',
       'Ron Clements'
@@ -88,7 +88,7 @@ let movies = [
     ]
   },
   {
-    title: 'The Lobster',
+    Title: 'The Lobster',
     director: 'Yorgos Lanthimos',
     writers: [
     'Yorgos Lanthimos',
@@ -104,7 +104,7 @@ let movies = [
     ]
   },
   {
-    title: 'Pappa Ante Portas',
+    Title: 'Pappa Ante Portas',
     director: 'Vicco von B&uuml;low',
     writers: 'Vicco von B&uuml;low',
     year: 1991,
@@ -117,7 +117,7 @@ let movies = [
     ]
   },
   {
-    title: 'The Neon Demon',
+    Title: 'The Neon Demon',
     director: 'Nicolas Winding Refn',
     writers: [
       'Nicolas Winding Refn',
@@ -134,7 +134,7 @@ let movies = [
     ]
   },
   {
-    title: 'Up',
+    Title: 'Up',
     director: [
       'Pete Docter',
       'Bob Peterson'
@@ -154,7 +154,7 @@ let movies = [
     ]
   },
   {
-    title: 'Lost In Translation',
+    Title: 'Lost In Translation',
     director: 'Sofia Coppola',
     writers: 'Sofia Coppola',
     year: 2003,
@@ -173,9 +173,21 @@ app.get('/', (req, res) => {
   res.send('Welcome to my Movie database');
 });
 
-
+// Gets the list of data about all movies
 app.get('/movies', (req, res) => {
   res.json(movies);
+});
+
+// Gets data about a single movie by title
+app.get('/movies/:title', (req, res) => {
+  const {title} = requ.params;
+  const movie = movies.find(movie => movie.Title === title);
+
+  if (movie) {
+    res.status(200).json(movie);
+  } else {
+    res.status(400).send('Movie is not in the database.');
+  }
 });
 
 // Error handling middleware logging app level errors
