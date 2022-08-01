@@ -41,7 +41,7 @@ let movies = [
       Name: 'Drama',
       Description: 'The drama genre features stories with high stakes and a lot of conflicts. They\'re plot-driven and demand that every character and scene move the story forward. Dramas follow a clearly defined narrative plot structure, portraying real-life scenarios or extreme situations with emotionally-driven characters.'
     },
-    Decription:'Spending the summer at a Catskills resort with her family, Frances "Baby" Houseman falls in love with the camp\'s dance instructor, Johnny Castle.',
+    Description:'Spending the summer at a Catskills resort with her family, Frances "Baby" Houseman falls in love with the camp\'s dance instructor, Johnny Castle.',
     stars: [
       'Patrick Swayze',
       'Jennifer Grey',
@@ -61,7 +61,7 @@ let movies = [
       Name: 'Comedy',
       Description: 'Comedy films are " make \'em laugh" films designed to elicit laughter from the audience. Comedies are light-hearted dramas, crafted to amuse, entertain, and provoke enjoyment. The comedy genre humorously exaggerates the situation, the language, action, and characters.'
     },
-    Decription:'A man entranced by his dreams and imagination is love-struck with a French woman and feels he can show her his world.',
+    Description:'A man entranced by his dreams and imagination is love-struck with a French woman and feels he can show her his world.',
     Stars: [
     'Gael García Bernal',
     'Charlotte Gainsbourg',
@@ -81,7 +81,7 @@ let movies = [
       Name: 'Horror',
       Description: 'Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs. Cinematic techniques used in horror films have been shown to provoke psychological reactions in an audience.'
     },
-    Decription:'A couple travels to Northern Europe to visit a rural hometown\'s fabled Swedish mid-summer festival. What begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult.',
+    Description:'A couple travels to Northern Europe to visit a rural hometown\'s fabled Swedish mid-summer festival. What begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult.',
     Stars: [
       'Florence Pugh',
       'Jack Reynor',
@@ -101,7 +101,7 @@ let movies = [
       Name: 'Horror',
       Description: 'Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs. Cinematic techniques used in horror films have been shown to provoke psychological reactions in an audience.'
     },
-    Decription:'A young African-American visits his white girlfriend\'s parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.',
+    Description:'A young African-American visits his white girlfriend\'s parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.',
     Stars: [
       'Daniel Kaluuya',
       'Allison Williams',
@@ -125,7 +125,7 @@ let movies = [
       Name: 'Animation',
       Description: 'Animation is a method in which figures are manipulated to appear as moving images. In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film. Today, most animations are made with computer-generated imagery (CGI).'
     },
-    Decription:'A mermaid princess makes a Faustian bargain in an attempt to become human and win a prince\'s love.',
+    Description:'A mermaid princess makes a Faustian bargain in an attempt to become human and win a prince\'s love.',
     Stars: [
       'Jodi Benson (voice)',
       'Samuel E. Wright (voice)',
@@ -148,7 +148,7 @@ let movies = [
       Name: 'Drama',
       Description: 'The drama genre features stories with high stakes and a lot of conflicts. They\'re plot-driven and demand that every character and scene move the story forward. Dramas follow a clearly defined narrative plot structure, portraying real-life scenarios or extreme situations with emotionally-driven characters.'
     },
-    Decription:'In a dystopian near future, according to the laws of The City, single people are taken to The Hotel, where they are obliged to find a romantic partner in 45 days or they\'re transformed into beasts and sent off into The Woods.',
+    Description:'In a dystopian near future, according to the laws of The City, single people are taken to The Hotel, where they are obliged to find a romantic partner in 45 days or they\'re transformed into beasts and sent off into The Woods.',
     Stars: [
       'Colin Farrell',
       'Rachel Weisz',
@@ -168,7 +168,7 @@ let movies = [
       Name: 'Comedy',
       Description: 'Comedy films are " make \'em laugh" films designed to elicit laughter from the audience. Comedies are light-hearted dramas, crafted to amuse, entertain, and provoke enjoyment. The comedy genre humorously exaggerates the situation, the language, action, and characters.'
     },
-    Decription:'After ordering enough typewriting paper for 40 years, just to get discount, Heinrich Lohse is forced to retire. The former manager has plenty of time now to spend with his wife and their 16 year old son. But - do they want that?',
+    Description:'After ordering enough typewriting paper for 40 years, just to get discount, Heinrich Lohse is forced to retire. The former manager has plenty of time now to spend with his wife and their 16 year old son. But - do they want that?',
     Stars: [
       'Loriot',
       'Evelyn Hamann',
@@ -192,7 +192,7 @@ let movies = [
       Name: 'Horror',
       Description: 'Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs. Cinematic techniques used in horror films have been shown to provoke psychological reactions in an audience.'
     },
-    Decription:'An aspiring model, Jesse, is new to Los Angeles. However, her beauty and youth, which generate intense fascination and jealousy within the fashion industry, may prove themselves sinister.',
+    Description:'An aspiring model, Jesse, is new to Los Angeles. However, her beauty and youth, which generate intense fascination and jealousy within the fashion industry, may prove themselves sinister.',
     Stars: [
       'Elle Fanning',
       'Christina Hendricks',
@@ -216,7 +216,7 @@ let movies = [
       Name: 'Animation',
       Description: 'Animation is a method in which figures are manipulated to appear as moving images. In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film. Today, most animations are made with computer-generated imagery (CGI).'
     },
-    Decription:'78-year-old Carl Fredricksen travels to Paradise Falls in his house equipped with balloons, inadvertently taking a young stowaway.',
+    Description:'78-year-old Carl Fredricksen travels to Paradise Falls in his house equipped with balloons, inadvertently taking a young stowaway.',
     Stars: [
       'Edward Asner (voice)',
       'Jordan Nagai (voice)',
@@ -236,7 +236,7 @@ let movies = [
       Name: 'Drama',
       Description: 'The drama genre features stories with high stakes and a lot of conflicts. They\'re plot-driven and demand that every character and scene move the story forward. Dramas follow a clearly defined narrative plot structure, portraying real-life scenarios or extreme situations with emotionally-driven characters.'
     },
-    Decription:'A faded movie star and a neglected young woman form an unlikely bond after crossing paths in Tokyo.',
+    Description:'A faded movie star and a neglected young woman form an unlikely bond after crossing paths in Tokyo.',
     Stars: [
       'Bill Murray',
       'Scarlett Johansson',
@@ -317,7 +317,7 @@ app.put('/users/:id', (req, res) => {
 
   if(user) {
     user = updatedUser.name;
-    res.status(200).send(`User name has been successfully updated.`);
+    res.status(200).res.send(`User name has been successfully updated to ${user.name}.`);
   } else {
     res.status(400).send('User could not be found.');
   }
