@@ -317,8 +317,7 @@ app.put('/users/:id', (req, res) => {
 
   if(user) {
     user = updatedUser.name;
-    res.status(200).json(user);
-    // res.send('User name has been updated successfully');
+    res.status(200).send(`User name has been successfully updated.`);
   } else {
     res.status(400).send('User could not be found.');
   }
