@@ -14,6 +14,19 @@ app.use(morgan('common'));
 // function serving all requests of static file (here:"documenation.html") from public folder
 app.use(express.static('public'));
 
+let users = [
+  {
+    id: 1,
+    name: "Jane Doe",
+    favouriteMovies: []
+  },
+  {
+    id: 2,
+    name: "Max Mustermann",
+    favouriteMovies: []
+  }
+];
+
 let movies = [
   {
     Title: 'Dirty Dancing',
@@ -239,12 +252,12 @@ app.get('/', (req, res) => {
 
 // ----------------------- Movie endpoints -----------------------
 
-// Gets the list of data about all movies
+// GET the list of data about all movies
 app.get('/movies', (req, res) => {
   res.json(movies);
 });
 
-// Gets data about a single movie by title
+// GET data about a single movie by title
 app.get('/movies/:title', (req, res) => {
   const {title} = req.params;
   const movie = movies.find(movie => movie.Title === title);
@@ -252,11 +265,11 @@ app.get('/movies/:title', (req, res) => {
   if (movie) {
     res.status(200).json(movie);
   } else {
-    res.status(400).send('Movie is not in the database.');
+    res.status(400).send('Movie could not be found.');
   }
 });
 
-// Gets data about a genre by name
+// GET data about a genre by name
 app.get('/movies/genre/:genreName', (req, res) => {
   const {genreName} = req.params;
   const genre = movies.find(movie => movie.Genre.Name === genreName).Genre;
@@ -264,11 +277,11 @@ app.get('/movies/genre/:genreName', (req, res) => {
   if (genre) {
     res.status(200).json(genre);
   } else {
-    res.status(400).send('Movie is not in the database.');
+    res.status(400).send('Genre could not be found.');
   }
 });
 
-// Gets data about a director by name
+// GET data about a director by name
 app.get('/movies/directors/:directorName', (req, res) => {
   const {directorName} = req.params;
   const director = movies.find(movie => movie.Director.Name === directorName).Director;
@@ -276,11 +289,82 @@ app.get('/movies/directors/:directorName', (req, res) => {
   if (director) {
     res.status(200).json(director);
   } else {
-    res.status(400).send('Movie is not in the database.');
+    res.status(400).send('Director could not be found.');
   }
 });
 
 // ----------------------- User endpoints -----------------------
+
+// POST data creating a new user
+app.post('/users', (req, res) => {
+  const newUser = req.body;
+
+  if (newUser.name) {
+    newUser.id = uuid.v4();
+    users.push(newUser);
+    res.status(201).json(newUser);
+  } else {
+    res.status(400).send('User needs a name!')
+  }
+});
+
+// PUT data updating a user's name by ID
+app.put('/users/:id', (req, res) => {
+  const {id} = req.params;
+  const updatedUser = req.body;
+
+  let user = users.find(user => user.id == id);
+
+  if(user) {
+    user = updatedUser.name;
+    res.status(200).json(user);
+    // res.send('User name has been updated successfully');
+  } else {
+    res.status(400).send('User could not be found.');
+  }
+});
+
+// PUT data adding a user's favourite movie to a list
+app.put('/users/:id/:movieTitle', (req, res) => {
+  const {id, movieTitle} = req.params;
+
+  let user = users.find(user => user.id == id);
+
+  if(user) {
+    user.favouriteMovies.push(movieTitle);
+    res.status(200).send(`"${movieTitle}" has been successfully added to the user ${id}'s' list.`);
+  } else {
+    res.status(400).send('User could not be found. The movie could not be added.');
+  }
+});
+
+// DELETE data removing a user's favourite movie from the list
+app.delete('/users/:id/:movieTitle', (req, res) => {
+  const {id, movieTitle} = req.params;
+
+  let user = users.find(user => user.id == id);
+
+  if(user) {
+    user.favouriteMovies = user.favouriteMovies.filter(title => title !== movieTitle);
+    res.status(200).send(`"${movieTitle}" has been successfully removed from the user ${id}'s list.`);
+  } else {
+    res.status(400).send('User could not be found.');
+  }
+});
+
+// DELETE data removing a user by ID
+app.delete('/users/:id', (req, res) => {
+  const {id} = req.params;
+
+  let user = users.find(user => user.id == id);
+
+  if(user) {
+    users = users.filter(user => user.id != id);
+    res.status(200).send(`User with ID ${id} has been successfully removed.`);
+  } else {
+    res.status(400).send('User could not be found.');
+  }
+});
 
 // Error handling middleware logging app level errors
 app.use((err, req, res, next) => {
