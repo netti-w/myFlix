@@ -5,23 +5,30 @@ const express = require('express'),
 
 const app = express();
 
+// Body parser middleware passing data as JSON
+app.use(bodyParser.json());
+
 // Morgan middleware logging requests
 app.use(morgan('common'));
 
 // function serving all requests of static file (here:"documenation.html") from public folder
 app.use(express.static('public'));
 
-// Body parser middleware passing data as JSON
-app.use(bodyParser.json());
-
 let movies = [
   {
     Title: 'Dirty Dancing',
-    director: 'Emile Ardolino',
-    writers: 'Eleanor Bergstein',
-    year: 1987,
-    genre: 'Drama',
-    decription:'Spending the summer at a Catskills resort with her family, Frances "Baby" Houseman falls in love with the camp\'s dance instructor, Johnny Castle.',
+    Director: {
+      Name:'Emile Ardolino',
+      Bio: 'Movie Director',
+      Birth: 1900
+    },
+    Writers: 'Eleanor Bergstein',
+    Year: 1987,
+    Genre: {
+      Name: 'Drama',
+      Description: 'The drama genre features stories with high stakes and a lot of conflicts. They\'re plot-driven and demand that every character and scene move the story forward. Dramas follow a clearly defined narrative plot structure, portraying real-life scenarios or extreme situations with emotionally-driven characters.'
+    },
+    Decription:'Spending the summer at a Catskills resort with her family, Frances "Baby" Houseman falls in love with the camp\'s dance instructor, Johnny Castle.',
     stars: [
       'Patrick Swayze',
       'Jennifer Grey',
@@ -30,12 +37,19 @@ let movies = [
   },
   {
     Title: 'The Science of Sleep',
-    director: 'Michel Gondry',
-    writers: 'Michel Gondry',
-    year: 2006,
-    genre: 'Comedy',
-    decription:'A man entranced by his dreams and imagination is love-struck with a French woman and feels he can show her his world.',
-    stars: [
+    Director: {
+      Name:'Michel Gondry',
+      Bio: 'Movie Director',
+      Birth: 1900
+    },
+    Writers: 'Michel Gondry',
+    Year: 2006,
+    Genre: {
+      Name: 'Comedy',
+      Description: 'Comedy films are " make \'em laugh" films designed to elicit laughter from the audience. Comedies are light-hearted dramas, crafted to amuse, entertain, and provoke enjoyment. The comedy genre humorously exaggerates the situation, the language, action, and characters.'
+    },
+    Decription:'A man entranced by his dreams and imagination is love-struck with a French woman and feels he can show her his world.',
+    Stars: [
     'Gael García Bernal',
     'Charlotte Gainsbourg',
     'Miou-Miou'
@@ -43,12 +57,19 @@ let movies = [
   },
   {
     Title: 'Midsommar',
-    director: 'Ari Aster',
-    writers: 'Ari Aster',
-    year: 2019,
-    genre: 'Horror',
-    decription:'A couple travels to Northern Europe to visit a rural hometown\'s fabled Swedish mid-summer festival. What begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult.',
-    stars: [
+    Director: {
+      Name:'Ari Aster',
+      Bio: 'Movie Director',
+      Birth: 1900
+    },
+    Writers: 'Ari Aster',
+    Year: 2019,
+    Genre: {
+      Name: 'Horror',
+      Description: 'Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs. Cinematic techniques used in horror films have been shown to provoke psychological reactions in an audience.'
+    },
+    Decription:'A couple travels to Northern Europe to visit a rural hometown\'s fabled Swedish mid-summer festival. What begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult.',
+    Stars: [
       'Florence Pugh',
       'Jack Reynor',
       'Vilhelm Blomgren'
@@ -56,12 +77,19 @@ let movies = [
   },
   {
     Title: 'Get Out',
-    director: 'Jordan Peele',
-    writers: 'Jordan Peele',
-    year: 2017,
-    genre: 'Horror',
-    decription:'A young African-American visits his white girlfriend\'s parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.',
-    stars: [
+    Director: {
+      Name:'Jordan Peele',
+      Bio: 'Movie Director',
+      Birth: 1900
+    },
+    Writers: 'Jordan Peele',
+    Year: 2017,
+    Genre: {
+      Name: 'Horror',
+      Description: 'Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs. Cinematic techniques used in horror films have been shown to provoke psychological reactions in an audience.'
+    },
+    Decription:'A young African-American visits his white girlfriend\'s parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.',
+    Stars: [
       'Daniel Kaluuya',
       'Allison Williams',
       'Bradley Whitford'
@@ -69,19 +97,23 @@ let movies = [
   },
   {
     Title: 'The Little Mermaid',
-    director: [
-      'John Musker',
-      'Ron Clements'
-    ],
-    writers: [
+    Director: {
+      Name:'John Musker',
+      Bio: 'Movie Director',
+      Birth: 1900
+    },
+    Writers: [
       'John Musker',
       'Ron Clements',
       'Hans Christian Andersen'
     ],
-    year: 1989,
-    genre: 'Animation',
-    decription:'A mermaid princess makes a Faustian bargain in an attempt to become human and win a prince\'s love.',
-    stars: [
+    Year: 1989,
+    Genre: {
+      Name: 'Animation',
+      Description: 'Animation is a method in which figures are manipulated to appear as moving images. In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film. Today, most animations are made with computer-generated imagery (CGI).'
+    },
+    Decription:'A mermaid princess makes a Faustian bargain in an attempt to become human and win a prince\'s love.',
+    Stars: [
       'Jodi Benson (voice)',
       'Samuel E. Wright (voice)',
       'Rene Auberjonois(voice)'
@@ -89,15 +121,22 @@ let movies = [
   },
   {
     Title: 'The Lobster',
-    director: 'Yorgos Lanthimos',
-    writers: [
+    Director: {
+      Name:'Yorgos Lanthimos',
+      Bio: 'Movie Director',
+      Birth: 1900
+    },
+    Writers: [
     'Yorgos Lanthimos',
     'Efthymis Filippou'
     ],
     year: 2015,
-    genre: 'Drama',
-    decription:'In a dystopian near future, according to the laws of The City, single people are taken to The Hotel, where they are obliged to find a romantic partner in 45 days or they\'re transformed into beasts and sent off into The Woods.',
-    stars: [
+    Genre: {
+      Name: 'Drama',
+      Description: 'The drama genre features stories with high stakes and a lot of conflicts. They\'re plot-driven and demand that every character and scene move the story forward. Dramas follow a clearly defined narrative plot structure, portraying real-life scenarios or extreme situations with emotionally-driven characters.'
+    },
+    Decription:'In a dystopian near future, according to the laws of The City, single people are taken to The Hotel, where they are obliged to find a romantic partner in 45 days or they\'re transformed into beasts and sent off into The Woods.',
+    Stars: [
       'Colin Farrell',
       'Rachel Weisz',
       'Jessica Barden'
@@ -105,12 +144,19 @@ let movies = [
   },
   {
     Title: 'Pappa Ante Portas',
-    director: 'Vicco von B&uuml;low',
-    writers: 'Vicco von B&uuml;low',
-    year: 1991,
-    genre: 'Comedy',
-    decription:'After ordering enough typewriting paper for 40 years, just to get discount, Heinrich Lohse is forced to retire. The former manager has plenty of time now to spend with his wife and their 16 year old son. But - do they want that?',
-    stars: [
+    Director: {
+      Name:'Vicco von B&uuml;low',
+      Bio: 'Movie Director',
+      Birth: 1900
+    },
+    Writers: 'Vicco von B&uuml;low',
+    Year: 1991,
+    Genre: {
+      Name: 'Comedy',
+      Description: 'Comedy films are " make \'em laugh" films designed to elicit laughter from the audience. Comedies are light-hearted dramas, crafted to amuse, entertain, and provoke enjoyment. The comedy genre humorously exaggerates the situation, the language, action, and characters.'
+    },
+    Decription:'After ordering enough typewriting paper for 40 years, just to get discount, Heinrich Lohse is forced to retire. The former manager has plenty of time now to spend with his wife and their 16 year old son. But - do they want that?',
+    Stars: [
       'Loriot',
       'Evelyn Hamann',
       'Irm Herrmann'
@@ -118,16 +164,23 @@ let movies = [
   },
   {
     Title: 'The Neon Demon',
-    director: 'Nicolas Winding Refn',
-    writers: [
+    Director: {
+      Name:'Nicolas Winding Refn',
+      Bio: 'Movie Director',
+      Birth: 1900
+    },
+    Writers: [
       'Nicolas Winding Refn',
       'Mary Laws',
       'Polly Stenham'
     ],
-    year: 2016,
-    genre: 'Horror',
-    decription:'An aspiring model, Jesse, is new to Los Angeles. However, her beauty and youth, which generate intense fascination and jealousy within the fashion industry, may prove themselves sinister.',
-    stars: [
+    Year: 2016,
+    Genre: {
+      Name: 'Horror',
+      Description: 'Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs. Cinematic techniques used in horror films have been shown to provoke psychological reactions in an audience.'
+    },
+    Decription:'An aspiring model, Jesse, is new to Los Angeles. However, her beauty and youth, which generate intense fascination and jealousy within the fashion industry, may prove themselves sinister.',
+    Stars: [
       'Elle Fanning',
       'Christina Hendricks',
       'Keanu Reeves'
@@ -135,19 +188,23 @@ let movies = [
   },
   {
     Title: 'Up',
-    director: [
-      'Pete Docter',
-      'Bob Peterson'
-    ],
-    writers: [
+    Director: {
+      Name:'Pete Docter',
+      Bio: 'Movie Director',
+      Birth: 1900
+    },
+    Writers: [
       'Pete Docter',
       'Bob Peterson',
       'Tom McCarthy'
     ],
-    year: 2009,
-    genre: 'Animation',
-    decription:'78-year-old Carl Fredricksen travels to Paradise Falls in his house equipped with balloons, inadvertently taking a young stowaway.',
-    stars: [
+    Year: 2009,
+    Genre: {
+      Name: 'Animation',
+      Description: 'Animation is a method in which figures are manipulated to appear as moving images. In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film. Today, most animations are made with computer-generated imagery (CGI).'
+    },
+    Decription:'78-year-old Carl Fredricksen travels to Paradise Falls in his house equipped with balloons, inadvertently taking a young stowaway.',
+    Stars: [
       'Edward Asner (voice)',
       'Jordan Nagai (voice)',
       'John Ratzenberger (voice)'
@@ -155,12 +212,19 @@ let movies = [
   },
   {
     Title: 'Lost In Translation',
-    director: 'Sofia Coppola',
-    writers: 'Sofia Coppola',
-    year: 2003,
-    genre: 'Comedy',
-    decription:'A faded movie star and a neglected young woman form an unlikely bond after crossing paths in Tokyo.',
-    stars: [
+    Director: {
+      Name:'Sofia Coppola',
+      Bio: 'Movie Director',
+      Birth: 1900
+    },
+    Writers: 'Sofia Coppola',
+    Year: 2003,
+    Genre: {
+      Name: 'Drama',
+      Description: 'The drama genre features stories with high stakes and a lot of conflicts. They\'re plot-driven and demand that every character and scene move the story forward. Dramas follow a clearly defined narrative plot structure, portraying real-life scenarios or extreme situations with emotionally-driven characters.'
+    },
+    Decription:'A faded movie star and a neglected young woman form an unlikely bond after crossing paths in Tokyo.',
+    Stars: [
       'Bill Murray',
       'Scarlett Johansson',
       'Giovanni Ribisi'
@@ -173,6 +237,8 @@ app.get('/', (req, res) => {
   res.send('Welcome to my Movie database');
 });
 
+// ----------------------- Movie endpoints -----------------------
+
 // Gets the list of data about all movies
 app.get('/movies', (req, res) => {
   res.json(movies);
@@ -180,7 +246,7 @@ app.get('/movies', (req, res) => {
 
 // Gets data about a single movie by title
 app.get('/movies/:title', (req, res) => {
-  const {title} = requ.params;
+  const {title} = req.params;
   const movie = movies.find(movie => movie.Title === title);
 
   if (movie) {
@@ -189,6 +255,32 @@ app.get('/movies/:title', (req, res) => {
     res.status(400).send('Movie is not in the database.');
   }
 });
+
+// Gets data about a genre by name
+app.get('/movies/genre/:genreName', (req, res) => {
+  const {genreName} = req.params;
+  const genre = movies.find(movie => movie.Genre.Name === genreName).Genre;
+
+  if (genre) {
+    res.status(200).json(genre);
+  } else {
+    res.status(400).send('Movie is not in the database.');
+  }
+});
+
+// Gets data about a director by name
+app.get('/movies/directors/:directorName', (req, res) => {
+  const {directorName} = req.params;
+  const director = movies.find(movie => movie.Director.Name === directorName).Director;
+
+  if (director) {
+    res.status(200).json(director);
+  } else {
+    res.status(400).send('Movie is not in the database.');
+  }
+});
+
+// ----------------------- User endpoints -----------------------
 
 // Error handling middleware logging app level errors
 app.use((err, req, res, next) => {
