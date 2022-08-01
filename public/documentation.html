@@ -3,12 +3,175 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>myFlix API</title>
+  <title>myFlix API Documentation</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
   <h1>Documentation</h1>
   <p>This is a REST API for an
     application called “myFlix” that interacts with a database that stores data about different movies
   </p>
+  <table>
+  <tr>
+    <th>Business Logic</th>
+    <th>URL</th>
+    <th>HTTP Method</th>
+    <th>Request Body Data Format</th>
+    <th>Response Body Data Format</th>
+  </tr>
+  <tr>
+    <td>Get a list of all movies</td>
+    <td>/movies</td>
+    <td><button class="button-green">GET</button></td>
+    <td>None</td>
+    <td>A JSON object holding data about all movies in the database.</td>
+  </tr>
+  <tr>
+    <td>Get data about a single movie by movie title</td>
+    <td>/movies/[title]</td>
+    <td><button class="button-green">GET</button></td>
+    <td>None</td>
+    <td>A JSON object holding data about a single movie, containing title,
+      director, writers, year, genre, description and stars property. <br><br>
+      Example:
+      <pre>
+      <code>
+        {
+          Title: 'Midsommar',
+          Director: {
+            Name:'Ari Aster',
+            Bio: 'Movie Director',
+            Birth: 1900
+          },
+          Writers: 'Ari Aster',
+          Year: 2019,
+          Genre: {
+            Name: 'Horror',
+            Description: 'Horror films often explore dark subject matter and
+            may deal with transgressive topics or themes. Broad elements include
+             monsters, apocalyptic events, and religious or folk beliefs.
+             Cinematic techniques used in horror films have been shown to
+             provoke psychological reactions in an audience.'
+          },
+          Decription:'A couple travels to Northern Europe to visit a rural
+          hometown\'s fabled Swedish mid-summer festival. What begins as an
+          idyllic retreat quickly devolves into an increasingly violent and
+          bizarre competition at the hands of a pagan cult.',
+          Stars: [
+            'Florence Pugh',
+            'Jack Reynor',
+            'Vilhelm Blomgren'
+          ]
+        }
+      </code>
+    </pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Get data about a genre by name</td>
+    <td>/movies/genre/[name]</td>
+    <td><button class="button-green">GET</button></td>
+    <td>None</td>
+    <td>A JSON object holding data about a genre, containing name and
+      description property.<br><br>
+      Example:
+    <pre>
+      <code>
+        {
+          Name: 'Horror',
+          Description:'Horror is a genre of storytelling intended to scare, shock,
+          and thrill its audience. Horror can be interpreted in many different ways,
+          but there is often a central villain, monster, or threat that is often
+          a reflection of the fears being experienced by society at the time.'
+        }
+      </code>
+    </pre>
+  </td>
+  </tr>
+  <tr>
+    <td>Get data about a director by name</td>
+    <td>/movies/directors/[name]</td>
+    <td><button class="button-green">GET</button></td>
+    <td>None</td>
+    <td>A JSON object holding data about a director, containing bio, birth year
+      property. <br><br>
+      Example:
+    <pre>
+      <code>
+        {
+          Name:'Ari Aster',
+          Bio: 'Movie Director',
+          Birth: 1900
+        }
+    </code>
+  </pre>
+</td>
+  </tr>
+  <tr>
+    <td>Add a new user</td>
+    <td>/users</td>
+    <td><button class="button-yellow">POST</button></td>
+    <td>
+      A JSON object holding data about a new user, structured like:
+      <pre>
+        <code>
+          {
+            name: 'Jane Doe',
+            favouriteMovies: []
+          }
+        </code>
+      </pre>
+  </td>
+    <td>A JSON object holding data about a new user, including an ID:
+      <pre>
+        <code>
+          {
+            name: 'Jane Doe',
+            favouriteMovies: [],
+            id: 1
+          }
+      </code>
+    </pre>
+  </td>
+  </tr>
+  <tr>
+    <td>Update a user's name by ID</td>
+    <td>/users/[id]</td>
+    <td><button class="button-blue">PUT</button></td>
+    <td>
+    <pre>
+      <code>
+        {
+          name: 'Jane New Name Doe'
+        }
+      </code>
+    </pre>
+    </td>
+    <td>A text message indicating the user's name was updated successfully.</td>
+</tr>
+<tr>
+  <td>Add a user's favourite movie by title</td>
+  <td>/users/[id]/[title]</td>
+  <td><button class="button-blue">PUT</button></td>
+  <td>None</td>
+  <td>A text message indicating that a movie has been added to
+    the favourite's list.</td>
+</tr>
+<tr>
+  <td>Delete a user's favourite movie by title</td>
+  <td>/users/[id]/[title]</td>
+  <td><button class="button-red">DELETE</button></td>
+  <td>None</td>
+  <td>A text message indicating whether the movie was successfully removed
+    from the favourite's list.</td>
+</tr>
+<tr>
+  <td>Delete a user by ID</td>
+  <td>/users/[id]</td>
+  <td><button class="button-red">DELETE</button></td>
+  <td>None</td>
+  <td>A text message indicating whether the user was successfully removed.</td>
+</tr>
+</table>
 </body>
 </html>
