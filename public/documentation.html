@@ -9,7 +9,8 @@
 <body>
   <h1>Documentation</h1>
   <p>This is a REST API for an
-    application called “myFlix” that interacts with a database that stores data about different movies
+    application called “myFlix” that interacts with a database that stores data
+     about different movies
   </p>
   <table>
   <tr>
@@ -32,37 +33,41 @@
     <td><button class="button-green">GET</button></td>
     <td>None</td>
     <td>A JSON object holding data about a single movie, containing title,
-      director, writers, year, genre, description and stars property. <br><br>
+      director, release year, genre, description, image path, featured and
+      actor property. <br><br>
       Example:
       <pre>
       <code>
         {
-          Title: 'Midsommar',
-          Director: {
-            Name:'Ari Aster',
-            Bio: 'Movie Director',
-            Birth: 1900
-          },
-          Writers: 'Ari Aster',
-          Year: 2019,
-          Genre: {
-            Name: 'Horror',
-            Description: 'Horror films often explore dark subject matter and
-            may deal with transgressive topics or themes. Broad elements include
-             monsters, apocalyptic events, and religious or folk beliefs.
-             Cinematic techniques used in horror films have been shown to
-             provoke psychological reactions in an audience.'
-          },
-          Description:'A couple travels to Northern Europe to visit a rural
-          hometown\'s fabled Swedish mid-summer festival. What begins as an
-          idyllic retreat quickly devolves into an increasingly violent and
-          bizarre competition at the hands of a pagan cult.',
-          Stars: [
-            'Florence Pugh',
-            'Jack Reynor',
-            'Vilhelm Blomgren'
-          ]
-        }
+            Title: "Midsommar",
+            Director: {
+              Name:"Ari Aster",
+              Bio: "Ari Aster is an American film director, screenwriter, and
+              producer. He is known for writing and directing the A24
+              horror films Hereditary (2018) and Midsommar (2019)",
+              Birth: 1986
+            },
+            ReleaseYear: 2019,
+            Genre: {
+              Name: "Horror",
+              Description: "Horror is a genre of storytelling intended to scare,
+               shock, and thrill its audience. Horror can be interpreted in many
+                different ways, but there is often a central villain, monster,
+                or threat that is often a reflection of the fears being
+                experienced by society at the time."
+            },
+            Description:"A couple travels to Northern Europe to visit a rural
+            hometown's fabled Swedish mid-summer festival. What begins as an
+            idyllic retreat quickly devolves into an increasingly violent and
+            bizarre competition at the hands of a pagan cult.",
+            ImagePath: "https://m.media-amazon.com/images/......jpg",
+            Featured: true,
+            Actors: [
+              "Florence Pugh",
+              "Jack Reynor",
+              "Vilhelm Blomgren"
+            ]
+          }
       </code>
     </pre>
     </td>
@@ -78,11 +83,12 @@
     <pre>
       <code>
         {
-          Name: 'Horror',
-          Description:'Horror is a genre of storytelling intended to scare, shock,
-          and thrill its audience. Horror can be interpreted in many different ways,
-          but there is often a central villain, monster, or threat that is often
-          a reflection of the fears being experienced by society at the time.'
+          Name: "Horror",
+          Description: "Horror is a genre of storytelling intended to scare,
+          shock, and thrill its audience. Horror can be interpreted in many
+          different ways, but there is often a central villain, monster,
+          or threat that is often a reflection of the fears being experienced
+          by society at the time."
         }
       </code>
     </pre>
@@ -99,9 +105,11 @@
     <pre>
       <code>
         {
-          Name:'Ari Aster',
-          Bio: 'Movie Director',
-          Birth: 1900
+          Name:"Ari Aster",
+          Bio: "Ari Aster is an American film director, screenwriter, and
+          producer. He is known for writing and directing the A24 horror films
+          Hereditary (2018) and Midsommar (2019)",
+          Birth: 1986
         }
     </code>
   </pre>
@@ -116,8 +124,11 @@
       <pre>
         <code>
           {
-            name: 'Jane Doe',
-            favouriteMovies: []
+            Username: "Jane Doe",
+            Password: "password123",
+            Email: "j.doe@mail.com",
+            Birthday: new Date("1991-06-14"),
+            FavouriteMovies: []
           }
         </code>
       </pre>
@@ -126,8 +137,11 @@
       <pre>
         <code>
           {
-            name: 'Jane Doe',
-            favouriteMovies: [],
+            Username: "Jane Doe",
+            Password: "password123",
+            Email: "j.doe@mail.com",
+            Birthday: "1991-06-14",
+            FavouriteMovies: [],
             id: 1
           }
       </code>
@@ -142,12 +156,13 @@
     <pre>
       <code>
         {
-          name: 'Jane New Name Doe'
+          Username: 'Jane New Name Doe'
         }
       </code>
     </pre>
     </td>
-    <td>A text message indicating the user's name was updated successfully.</td>
+    <td>A text message indicating the user's name was updated
+      successfully.</td>
 </tr>
 <tr>
   <td>Add a user's favourite movie by title</td>
@@ -170,7 +185,8 @@
   <td>/users/[id]</td>
   <td><button class="button-red">DELETE</button></td>
   <td>None</td>
-  <td>A text message indicating whether the user was successfully removed.</td>
+  <td>A text message indicating whether the user was
+    successfully removed.</td>
 </tr>
 </table>
 </body>
