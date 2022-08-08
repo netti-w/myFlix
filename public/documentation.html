@@ -9,8 +9,8 @@
 <body>
   <h1>Documentation</h1>
   <p>This is a REST API for an
-    application called “myFlix” that interacts with a database that stores data
-     about different movies
+    application called “myFlix” that interacts with a database that
+    stores data about different movies.
   </p>
   <table>
   <tr>
@@ -38,43 +38,44 @@
       Example:
       <pre>
       <code>
-        {
-            Title: "Midsommar",
-            Director: {
-              Name:"Ari Aster",
-              Bio: "Ari Aster is an American film director, screenwriter, and
-              producer. He is known for writing and directing the A24
-              horror films Hereditary (2018) and Midsommar (2019)",
-              Birth: 1986
-            },
-            ReleaseYear: 2019,
-            Genre: {
-              Name: "Horror",
-              Description: "Horror is a genre of storytelling intended to scare,
-               shock, and thrill its audience. Horror can be interpreted in many
-                different ways, but there is often a central villain, monster,
-                or threat that is often a reflection of the fears being
-                experienced by society at the time."
-            },
-            Description:"A couple travels to Northern Europe to visit a rural
-            hometown's fabled Swedish mid-summer festival. What begins as an
-            idyllic retreat quickly devolves into an increasingly violent and
-            bizarre competition at the hands of a pagan cult.",
-            ImagePath: "https://m.media-amazon.com/images/......jpg",
-            Featured: true,
-            Actors: [
-              "Florence Pugh",
-              "Jack Reynor",
-              "Vilhelm Blomgren"
-            ]
-          }
-      </code>
-    </pre>
+      {
+        _id: "62eac5ab1ef36b8f67491b05"
+        Title: "Midsommar",
+        Director: {
+          Name:"Ari Aster",
+          Bio: "Ari Aster is an American film director, screenwriter, and
+          producer. He is known for writing and directing the A24
+          horror films Hereditary (2018) and Midsommar (2019)",
+          Birth: 1986
+        },
+        ReleaseYear: 2019,
+        Genre: {
+          Name: "Horror",
+          Description: "Horror is a genre of storytelling intended to scare,
+           shock, and thrill its audience. Horror can be interpreted in many
+            different ways, but there is often a central villain, monster,
+            or threat that is often a reflection of the fears being
+            experienced by society at the time."
+        },
+        Description: "A couple travels to Northern Europe to visit a rural
+        hometown's fabled Swedish mid-summer festival. What begins as an
+        idyllic retreat quickly devolves into an increasingly violent and
+        bizarre competition at the hands of a pagan cult.",
+        ImagePath: "https://m.media-amazon.com/images/......jpg",
+        Featured: true,
+        Actors: [
+          "Florence Pugh",
+          "Jack Reynor",
+          "Vilhelm Blomgren"
+        ]
+        }
+        </code>
+      </pre>
     </td>
   </tr>
   <tr>
     <td>Get data about a genre by name</td>
-    <td>/movies/genre/[name]</td>
+    <td>/movies/genre/[genrename]</td>
     <td><button class="button-green">GET</button></td>
     <td>None</td>
     <td>A JSON object holding data about a genre, containing name and
@@ -82,21 +83,21 @@
       Example:
     <pre>
       <code>
-        {
-          Name: "Horror",
-          Description: "Horror is a genre of storytelling intended to scare,
-          shock, and thrill its audience. Horror can be interpreted in many
-          different ways, but there is often a central villain, monster,
-          or threat that is often a reflection of the fears being experienced
-          by society at the time."
-        }
+      {
+        Name: "Horror",
+        Description: "Horror is a genre of storytelling intended to scare,
+        shock, and thrill its audience. Horror can be interpreted in many
+        different ways, but there is often a central villain, monster,
+        or threat that is often a reflection of the fears being experienced
+        by society at the time."
+      }
       </code>
     </pre>
   </td>
   </tr>
   <tr>
     <td>Get data about a director by name</td>
-    <td>/movies/directors/[name]</td>
+    <td>/movies/directors/[directorname]</td>
     <td><button class="button-green">GET</button></td>
     <td>None</td>
     <td>A JSON object holding data about a director, containing bio, birth year
@@ -104,13 +105,13 @@
       Example:
     <pre>
       <code>
-        {
-          Name:"Ari Aster",
-          Bio: "Ari Aster is an American film director, screenwriter, and
-          producer. He is known for writing and directing the A24 horror films
-          Hereditary (2018) and Midsommar (2019)",
-          Birth: 1986
-        }
+      {
+        Name:"Ari Aster",
+        Bio: "Ari Aster is an American film director, screenwriter, and
+        producer. He is known for writing and directing the A24 horror films
+        Hereditary (2018) and Midsommar (2019)",
+        Birth: 1986
+      }
     </code>
   </pre>
 </td>
@@ -123,66 +124,106 @@
       A JSON object holding data about a new user, structured like:
       <pre>
         <code>
-          {
-            Username: "Jane Doe",
-            Password: "password123",
-            Email: "j.doe@mail.com",
-            Birthday: new Date("1991-06-14"),
-            FavouriteMovies: []
-          }
+        {
+          Username: "Jane Doe",
+          Password: "password123",
+          Email: "j.doe@mail.com",
+          Birthday: new Date("1991-06-14"),
+          FavouriteMovies: [] (optional)
+        }
         </code>
       </pre>
   </td>
     <td>A JSON object holding data about a new user, including an ID:
       <pre>
         <code>
-          {
-            Username: "Jane Doe",
-            Password: "password123",
-            Email: "j.doe@mail.com",
-            Birthday: "1991-06-14",
-            FavouriteMovies: [],
-            id: 1
-          }
+        {
+          Username: "Jane Doe",
+          Password: "password123",
+          Email: "j.doe@mail.com",
+          Birthday: "1991-06-14T00:00:00.000Z",
+          FavouriteMovies: [],
+          _id: "62f106b3aa03383916db5809"
+        }
       </code>
     </pre>
   </td>
   </tr>
   <tr>
-    <td>Update a user's name by ID</td>
-    <td>/users/[id]</td>
+    <td>Update a user's info by user name</td>
+    <td>/users/[username]</td>
     <td><button class="button-blue">PUT</button></td>
     <td>
     <pre>
       <code>
-        {
-          Username: 'Jane New Name Doe'
-        }
+      {
+        Username: 'Jane New Name Doe'
+      }
       </code>
     </pre>
     </td>
-    <td>A text message indicating the user's name was updated
-      successfully.</td>
+    <td>A JSON object holding updated data about the user:
+      <pre>
+        <code>
+        {
+          Username: "Jane New Name Doe",
+          Password: "password123",
+          Email: "j.doe@mail.com",
+          Birthday: "1991-06-14T00:00:00.000Z",
+          FavouriteMovies: [],
+          _id: "62f106b3aa03383916db5809"
+        }
+        </code>
+      </pre>
+    </td>
 </tr>
 <tr>
-  <td>Add a user's favourite movie by title</td>
-  <td>/users/[id]/[title]</td>
+  <td>Add a user's favourite movie by movie ID</td>
+  <td>/users/[username]/movies/[movieid]</td>
   <td><button class="button-blue">PUT</button></td>
   <td>None</td>
-  <td>A text message indicating that a movie has been added to
-    the favourite's list.</td>
+  <td>A JSON object holding data about the user, including movie ID in a
+    "FavouriteMovies" array:
+    <pre>
+      <code>
+      {
+        Username: "Jane New Name Doe",
+        Password: "password123",
+        Email: "j.doe@mail.com",
+        Birthday: "1991-06-14T00:00:00.000Z",
+        FavouriteMovies: [
+          "62eac5781ef36b8f67491b03"
+        ],
+        _id: "62f106b3aa03383916db5809"
+      }
+      </code>
+    </pre>
+  </td>
 </tr>
 <tr>
   <td>Delete a user's favourite movie by title</td>
-  <td>/users/[id]/[title]</td>
+  <td>/users/[username]/movies/[movieid]</td>
   <td><button class="button-red">DELETE</button></td>
   <td>None</td>
-  <td>A text message indicating whether the movie was successfully removed
-    from the favourite's list.</td>
+  <td>A JSON object holding data about the user, excluding the movie ID
+    that has been removed:
+    <pre>
+      <code>
+      {
+        Username: "Jane New Name Doe",
+        Password: "password123",
+        Email: "j.doe@mail.com",
+        Birthday: "1991-06-14T00:00:00.000Z",
+        FavouriteMovies: [],
+        _id: "62f106b3aa03383916db5809"
+      }
+      </code>
+    </pre>
+  </td>
 </tr>
 <tr>
-  <td>Delete a user by ID</td>
-  <td>/users/[id]</td>
+  <td>Delete a user by user name</td>
+  <td>/users/[username]</td>
   <td><button class="button-red">DELETE</button></td>
   <td>None</td>
   <td>A text message indicating whether the user was
