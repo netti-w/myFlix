@@ -3,247 +3,27 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   uuid = require('uuid');
 
+const mongoose = require('mongoose'); // require (import) mongoose package
+const Models = require('./models.js'); //require (import) 'custom' models.js
+
+// call movie and user modals from modals.js
+const Movies = Models.Movie;
+const Users = Models.User;
+
+// Connecting Mongoose to myFlix DB to perform CRUD operations
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+
 const app = express();
 
 // Body parser middleware passing data as JSON
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Morgan middleware logging requests
 app.use(morgan('common'));
 
 // function serving all requests of static file (here:"documenation.html") from public folder
 app.use(express.static('public'));
-
-let users = [
-  {
-    id: 1,
-    name: "Jane Doe",
-    favouriteMovies: []
-  },
-  {
-    id: 2,
-    name: "Max Mustermann",
-    favouriteMovies: []
-  }
-];
-
-let movies = [
-  {
-    Title: 'Dirty Dancing',
-    Director: {
-      Name:'Emile Ardolino',
-      Bio: 'Movie Director',
-      Birth: 1900
-    },
-    Writers: 'Eleanor Bergstein',
-    Year: 1987,
-    Genre: {
-      Name: 'Drama',
-      Description: 'The drama genre features stories with high stakes and a lot of conflicts. They\'re plot-driven and demand that every character and scene move the story forward. Dramas follow a clearly defined narrative plot structure, portraying real-life scenarios or extreme situations with emotionally-driven characters.'
-    },
-    Description:'Spending the summer at a Catskills resort with her family, Frances "Baby" Houseman falls in love with the camp\'s dance instructor, Johnny Castle.',
-    stars: [
-      'Patrick Swayze',
-      'Jennifer Grey',
-      'Jerry Orbach'
-    ]
-  },
-  {
-    Title: 'The Science of Sleep',
-    Director: {
-      Name:'Michel Gondry',
-      Bio: 'Movie Director',
-      Birth: 1900
-    },
-    Writers: 'Michel Gondry',
-    Year: 2006,
-    Genre: {
-      Name: 'Comedy',
-      Description: 'Comedy films are " make \'em laugh" films designed to elicit laughter from the audience. Comedies are light-hearted dramas, crafted to amuse, entertain, and provoke enjoyment. The comedy genre humorously exaggerates the situation, the language, action, and characters.'
-    },
-    Description:'A man entranced by his dreams and imagination is love-struck with a French woman and feels he can show her his world.',
-    Stars: [
-    'Gael García Bernal',
-    'Charlotte Gainsbourg',
-    'Miou-Miou'
-    ]
-  },
-  {
-    Title: 'Midsommar',
-    Director: {
-      Name:'Ari Aster',
-      Bio: 'Movie Director',
-      Birth: 1900
-    },
-    Writers: 'Ari Aster',
-    Year: 2019,
-    Genre: {
-      Name: 'Horror',
-      Description: 'Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs. Cinematic techniques used in horror films have been shown to provoke psychological reactions in an audience.'
-    },
-    Description:'A couple travels to Northern Europe to visit a rural hometown\'s fabled Swedish mid-summer festival. What begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult.',
-    Stars: [
-      'Florence Pugh',
-      'Jack Reynor',
-      'Vilhelm Blomgren'
-    ]
-  },
-  {
-    Title: 'Get Out',
-    Director: {
-      Name:'Jordan Peele',
-      Bio: 'Movie Director',
-      Birth: 1900
-    },
-    Writers: 'Jordan Peele',
-    Year: 2017,
-    Genre: {
-      Name: 'Horror',
-      Description: 'Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs. Cinematic techniques used in horror films have been shown to provoke psychological reactions in an audience.'
-    },
-    Description:'A young African-American visits his white girlfriend\'s parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.',
-    Stars: [
-      'Daniel Kaluuya',
-      'Allison Williams',
-      'Bradley Whitford'
-    ]
-  },
-  {
-    Title: 'The Little Mermaid',
-    Director: {
-      Name:'John Musker',
-      Bio: 'Movie Director',
-      Birth: 1900
-    },
-    Writers: [
-      'John Musker',
-      'Ron Clements',
-      'Hans Christian Andersen'
-    ],
-    Year: 1989,
-    Genre: {
-      Name: 'Animation',
-      Description: 'Animation is a method in which figures are manipulated to appear as moving images. In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film. Today, most animations are made with computer-generated imagery (CGI).'
-    },
-    Description:'A mermaid princess makes a Faustian bargain in an attempt to become human and win a prince\'s love.',
-    Stars: [
-      'Jodi Benson (voice)',
-      'Samuel E. Wright (voice)',
-      'Rene Auberjonois(voice)'
-    ]
-  },
-  {
-    Title: 'The Lobster',
-    Director: {
-      Name:'Yorgos Lanthimos',
-      Bio: 'Movie Director',
-      Birth: 1900
-    },
-    Writers: [
-    'Yorgos Lanthimos',
-    'Efthymis Filippou'
-    ],
-    year: 2015,
-    Genre: {
-      Name: 'Drama',
-      Description: 'The drama genre features stories with high stakes and a lot of conflicts. They\'re plot-driven and demand that every character and scene move the story forward. Dramas follow a clearly defined narrative plot structure, portraying real-life scenarios or extreme situations with emotionally-driven characters.'
-    },
-    Description:'In a dystopian near future, according to the laws of The City, single people are taken to The Hotel, where they are obliged to find a romantic partner in 45 days or they\'re transformed into beasts and sent off into The Woods.',
-    Stars: [
-      'Colin Farrell',
-      'Rachel Weisz',
-      'Jessica Barden'
-    ]
-  },
-  {
-    Title: 'Pappa Ante Portas',
-    Director: {
-      Name:'Vicco von B&uuml;low',
-      Bio: 'Movie Director',
-      Birth: 1900
-    },
-    Writers: 'Vicco von B&uuml;low',
-    Year: 1991,
-    Genre: {
-      Name: 'Comedy',
-      Description: 'Comedy films are " make \'em laugh" films designed to elicit laughter from the audience. Comedies are light-hearted dramas, crafted to amuse, entertain, and provoke enjoyment. The comedy genre humorously exaggerates the situation, the language, action, and characters.'
-    },
-    Description:'After ordering enough typewriting paper for 40 years, just to get discount, Heinrich Lohse is forced to retire. The former manager has plenty of time now to spend with his wife and their 16 year old son. But - do they want that?',
-    Stars: [
-      'Loriot',
-      'Evelyn Hamann',
-      'Irm Herrmann'
-    ]
-  },
-  {
-    Title: 'The Neon Demon',
-    Director: {
-      Name:'Nicolas Winding Refn',
-      Bio: 'Movie Director',
-      Birth: 1900
-    },
-    Writers: [
-      'Nicolas Winding Refn',
-      'Mary Laws',
-      'Polly Stenham'
-    ],
-    Year: 2016,
-    Genre: {
-      Name: 'Horror',
-      Description: 'Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs. Cinematic techniques used in horror films have been shown to provoke psychological reactions in an audience.'
-    },
-    Description:'An aspiring model, Jesse, is new to Los Angeles. However, her beauty and youth, which generate intense fascination and jealousy within the fashion industry, may prove themselves sinister.',
-    Stars: [
-      'Elle Fanning',
-      'Christina Hendricks',
-      'Keanu Reeves'
-    ]
-  },
-  {
-    Title: 'Up',
-    Director: {
-      Name:'Pete Docter',
-      Bio: 'Movie Director',
-      Birth: 1900
-    },
-    Writers: [
-      'Pete Docter',
-      'Bob Peterson',
-      'Tom McCarthy'
-    ],
-    Year: 2009,
-    Genre: {
-      Name: 'Animation',
-      Description: 'Animation is a method in which figures are manipulated to appear as moving images. In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film. Today, most animations are made with computer-generated imagery (CGI).'
-    },
-    Description:'78-year-old Carl Fredricksen travels to Paradise Falls in his house equipped with balloons, inadvertently taking a young stowaway.',
-    Stars: [
-      'Edward Asner (voice)',
-      'Jordan Nagai (voice)',
-      'John Ratzenberger (voice)'
-    ]
-  },
-  {
-    Title: 'Lost In Translation',
-    Director: {
-      Name:'Sofia Coppola',
-      Bio: 'Movie Director',
-      Birth: 1900
-    },
-    Writers: 'Sofia Coppola',
-    Year: 2003,
-    Genre: {
-      Name: 'Drama',
-      Description: 'The drama genre features stories with high stakes and a lot of conflicts. They\'re plot-driven and demand that every character and scene move the story forward. Dramas follow a clearly defined narrative plot structure, portraying real-life scenarios or extreme situations with emotionally-driven characters.'
-    },
-    Description:'A faded movie star and a neglected young woman form an unlikely bond after crossing paths in Tokyo.',
-    Stars: [
-      'Bill Murray',
-      'Scarlett Johansson',
-      'Giovanni Ribisi'
-    ]
-  }
-];
 
 // GET requests
 app.get('/', (req, res) => {
@@ -254,115 +34,169 @@ app.get('/', (req, res) => {
 
 // GET the list of data about all movies
 app.get('/movies', (req, res) => {
-  res.json(movies);
+  Movies.find().then(movies => res.json(movies));
 });
 
 // GET data about a single movie by title
-app.get('/movies/:title', (req, res) => {
-  const {title} = req.params;
-  const movie = movies.find(movie => movie.Title === title);
-
-  if (movie) {
-    res.status(200).json(movie);
-  } else {
-    res.status(400).send('Movie could not be found.');
-  }
+app.get('/movies/:Title', (req, res) => {
+  Movies.findOne({ Title: req.params.Title })
+    .then((movie) => {
+      res.json(movie);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // GET data about a genre by name
-app.get('/movies/genre/:genreName', (req, res) => {
-  const {genreName} = req.params;
-  const genre = movies.find(movie => movie.Genre.Name === genreName).Genre;
-
-  if (genre) {
-    res.status(200).json(genre);
-  } else {
-    res.status(400).send('Genre could not be found.');
-  }
+app.get('/movies/genres/:genreName', (req, res) => {
+  Movies.findOne({ "Genre.Name": req.params.genreName })
+    .then((movie) => {
+      res.json(movie.Genre);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // GET data about a director by name
 app.get('/movies/directors/:directorName', (req, res) => {
-  const {directorName} = req.params;
-  const director = movies.find(movie => movie.Director.Name === directorName).Director;
-
-  if (director) {
-    res.status(200).json(director);
-  } else {
-    res.status(400).send('Director could not be found.');
-  }
+  Movies.findOne({ "Director.Name": req.params.directorName })
+    .then((movie) => {
+      res.json(movie.Director);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // ----------------------- User endpoints -----------------------
 
 // POST data creating a new user
-app.post('/users', (req, res) => {
-  const newUser = req.body;
 
-  if (newUser.name) {
-    newUser.id = uuid.v4();
-    users.push(newUser);
-    res.status(201).json(newUser);
-  } else {
-    res.status(400).send('User needs a name!')
-  }
+/* We’ll expect JSON in this format
+{
+  ID: Integer,
+  Username: String,
+  Password: String,
+  Email: String,
+  Birthday: Date
+}*/
+app.post('/users', (req, res) => {
+  Users.findOne({ Username: req.body.Username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + 'already exists');
+      } else {
+        Users.create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) =>{res.status(201).json(user) })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+        })
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
 });
 
-// PUT data updating a user's name by ID
-app.put('/users/:id', (req, res) => {
-  const {id} = req.params;
-  const updatedUser = req.body;
+// GET data about a user by username
+app.get('/users/:Username', (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
 
-  let user = users.find(user => user.id == id);
+// PUT data updating a user's name by user name
 
-  if(user) {
-    user = updatedUser.name;
-    res.status(200).res.send(`User name has been successfully updated to ${user.name}.`);
-  } else {
-    res.status(400).send('User could not be found.');
-  }
+/* We’ll expect JSON in this format
+{
+  Username: String, (required)
+  Password: String, (required)
+  Email: String, (required)
+  Birthday: Date
+}*/
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username },
+    { $set: {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
+  },
+  { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
 // PUT data adding a user's favourite movie to a list
-app.put('/users/:id/:movieTitle', (req, res) => {
-  const {id, movieTitle} = req.params;
-
-  let user = users.find(user => user.id == id);
-
-  if(user) {
-    user.favouriteMovies.push(movieTitle);
-    res.status(200).send(`"${movieTitle}" has been successfully added to the user ${id}'s' list.`);
-  } else {
-    res.status(400).send('User could not be found. The movie could not be added.');
-  }
+app.put('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+     $push: { FavouriteMovies: req.params.MovieID }
+   },
+   { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
 // DELETE data removing a user's favourite movie from the list
-app.delete('/users/:id/:movieTitle', (req, res) => {
-  const {id, movieTitle} = req.params;
-
-  let user = users.find(user => user.id == id);
-
-  if(user) {
-    user.favouriteMovies = user.favouriteMovies.filter(title => title !== movieTitle);
-    res.status(200).send(`"${movieTitle}" has been successfully removed from the user ${id}'s list.`);
-  } else {
-    res.status(400).send('User could not be found.');
-  }
+app.delete('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+     $pull: { FavouriteMovies: req.params.MovieID }
+   },
+   { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
-// DELETE data removing a user by ID
-app.delete('/users/:id', (req, res) => {
-  const {id} = req.params;
-
-  let user = users.find(user => user.id == id);
-
-  if(user) {
-    users = users.filter(user => user.id != id);
-    res.status(200).send(`User with ID ${id} has been successfully removed.`);
-  } else {
-    res.status(400).send('User could not be found.');
-  }
+// DELETE data removing a user by user name
+app.delete('/users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
+    .then((user) => {
+      if (!user) {
+        res.status(400).send(req.params.Username + ' was not found');
+      } else {
+        res.status(200).send(req.params.Username + ' was deleted.');
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // Error handling middleware logging app level errors
