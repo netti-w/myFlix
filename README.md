@@ -10,7 +10,7 @@ In addition the app provides an API documentation listing API endpoints, their r
 - Javascript
 - HTML
 - Express
-- Node.js 
+- Node.js
 - MongoDB
 - Mongoose (for building business logic)
 - Morgan middleware (logging requests)
