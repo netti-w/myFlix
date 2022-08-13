@@ -20,6 +20,12 @@ In addition the app provides an API documentation listing API endpoints, their r
 
 ## Project screenshots
 
+API documentation:
+![](img/screenshots/screenshot_api_doc.png)
+
+API documentation (responsive):
+![](img/screenshots/screenshot_api_doc_responsive.png)
+
 
 ## Project Repository
 [myFlix API](https://github.com/netti-w/myFlix)
