@@ -2,6 +2,7 @@ const express = require('express'),
   morgan = require('morgan'),
   bodyParser = require('body-parser'),
   uuid = require('uuid');
+  const { check, validationResult } = require('express-validator');
 
 const mongoose = require('mongoose'); // require (import) mongoose package
 const Models = require('./models.js'); //require (import) 'custom' models.js
@@ -19,6 +20,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// CORS - allowing requests from other specified origins (here: default all origins)
+const cors = require('cors');
+app.use(cors());
+
+// Passport authentication middleware
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
@@ -28,6 +34,9 @@ app.use(morgan('common'));
 
 // function serving all requests of static file (here:"documenation.html") from public folder
 app.use(express.static('public'));
+
+
+// ----------------------- Homepage -----------------------
 
 // GET requests
 app.get('/', (req, res) => {
@@ -81,15 +90,21 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
 
 // POST data creating a new user
 
-/* We’ll expect JSON in this format
-{
-  ID: Integer,
-  Username: String,
-  Password: String,
-  Email: String,
-  Birthday: Date
-}*/
-app.post('/users', (req, res) => {
+app.post('/users',
+[
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+  // check the validation object for errors
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
+  let hashedPassword = Users.hashPassword(req.body.Password); //hashes PW when registering before storing in MongoDB
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -97,7 +112,7 @@ app.post('/users', (req, res) => {
       } else {
         Users.create({
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday
           })
@@ -114,16 +129,21 @@ app.post('/users', (req, res) => {
     });
 });
 
-// PUT data updating a user's name by user name
+// PUT data updating a user's info by user name
 
-/* We’ll expect JSON in this format
-{
-  Username: String, (required)
-  Password: String, (required)
-  Email: String, (required)
-  Birthday: Date
-}*/
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
+[
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   Users.findOneAndUpdate({ Username: req.params.Username },
     { $set: {
       Username: req.body.Username,
