@@ -11,8 +11,11 @@ const Models = require('./models.js'); //require (import) 'custom' models.js
 const Movies = Models.Movie;
 const Users = Models.User;
 
-// Connecting Mongoose to myFlix DB to perform CRUD operations
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+// Connecting LOCAL myFlixDB via Mongoose to perform CRUD operations
+// mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Connecting EXTERNAL (MongoDB Atlas) myFlixDB via Mongoose to perform CRUD operations
+mongoose.connect('process.env.CONNECTION_URI', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 
