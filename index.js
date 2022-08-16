@@ -14,9 +14,6 @@ const Users = Models.User;
 // Connecting LOCAL myFlixDB via Mongoose to perform CRUD operations
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
-// mongoose.connect('mongodb://127.0.0.1:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true }); //test
-// mongoose.connect('mongodb://0.0.0.0:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true }); //test
-
 // Connecting EXTERNAL (MongoDB Atlas) myFlixDB via Mongoose to perform CRUD operations
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -94,8 +91,24 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
 
 // ----------------------- User endpoints -----------------------
 
-// POST data creating a new user
+// GET the list of all users
+app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.find().then(users => res.json(users));
+});
 
+// GET data about a single movie by title
+app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Movies.findOne({ Title: req.params.Title })
+    .then((movie) => {
+      res.json(movie);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
+// POST data creating a new user
 app.post('/users',
 [
   check('Username', 'Username is required').isLength({min: 5}),
