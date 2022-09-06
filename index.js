@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 // ----------------------- Movie endpoints -----------------------
 
 // GET the list of data about all movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find().then(movies => res.json(movies));
 });
 
