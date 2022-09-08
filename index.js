@@ -96,11 +96,11 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) =
   Users.find().then(users => res.json(users));
 });
 
-// GET data about a single movie by title
-app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Movies.findOne({ Title: req.params.Title })
-    .then((movie) => {
-      res.json(movie);
+// GET data about a single user by name
+app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+    .then((user) => {
+      res.json(user);
     })
     .catch((err) => {
       console.error(err);
