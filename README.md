@@ -31,3 +31,4 @@ API documentation (responsive):
 [myFlix API](https://github.com/netti-w/myFlix)
 
 ## Project link
+[myFlix API documentation](https://myflix-nw.herokuapp.com/documentation.html)
