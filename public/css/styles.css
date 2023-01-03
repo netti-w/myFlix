@@ -1,32 +1,33 @@
-body{
-	margin:0;
-	padding:20px;
-	font-family: sans-serif;
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: sans-serif;
 }
 
-*{
-	box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
-.table{
-	width: 100%;
-	border-collapse: collapse;
+.table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.table td,.table th{
-  padding:12px 15px;
-  border:1px solid #cacaca;
+.table td,
+.table th {
+  padding: 12px 15px;
+  border: 1px solid #cacaca;
   text-align: left;
-  font-size:14px;
+  font-size: 14px;
 }
 
-.table th{
-	background-color: #505050;
-	color:#ffffff;
+.table th {
+  background-color: #505050;
+  color: #ffffff;
 }
 
-.table tbody tr:nth-child(even){
-	background-color: #ebebeb;
+.table tbody tr:nth-child(even) {
+  background-color: #ebebeb;
 }
 
 .button-green {
@@ -75,43 +76,49 @@ body{
 
 /*responsive*/
 
-@media(max-width: 700px){
-	.table thead{
-		display: none;
-	}
-
-	.table, .table tbody, .table tr, .table td{
-		display: block;
-		width: 100%;
-	}
-	.table tr{
-		margin-bottom:15px;
-	}
-	.table td{
-		text-align: right;
-		padding-left: 20%;
-    font-size:12px;
-		text-align: left;
-		position: relative;
-	}
-	.table td::before{
-		content: attr(data-label);
-		position: absolute;
-		left:0;
-		width: 30%;
-		padding-left:15px;
-		font-size:14px;
-		font-weight: bold;
-		text-align: left;
-	}
-}
-
-@media(max-width: 500px){
-  .table td{
-    font-size:10px;
+@media(max-width: 500px) {
+  .table thead {
+    display: none;
   }
 
-  .table td::before{
-    font-size:12px;
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table tr {
+    margin-bottom: 15px;
+  }
+
+  .table td {
+    text-align: right;
+    padding-left: 20%;
+    font-size: 12px;
+    text-align: left;
+    position: relative;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 30%;
+    padding-left: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+  }
+}
+
+@media(max-width: 500px) {
+  .table td {
+    font-size: 10px;
+  }
+
+  .table td::before {
+    font-size: 12px;
   }
 }
