@@ -4,7 +4,7 @@
   "description": "",
   "main": "functions/index.js",
   "scripts": {
-    "build": "netlify-lambda build index.js",
+    "build": "netlify-lambda build express",
     "start": "nodemon server-local.js"
   },
   "repository": {

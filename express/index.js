@@ -6,7 +6,7 @@ const express = require('express'),
 const { check, validationResult } = require('express-validator');
 
 const mongoose = require('mongoose'); // require (import) mongoose package
-const Models = require('./models.js'); //require (import) 'custom' models.js
+const Models = require('../models.js'); //require (import) 'custom' models.js
 
 // call movie and user modals from modals.js
 const Movies = Models.Movie;
@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, 
 
 const app = express();
 
-const { API_ROOT } = require('./config');
+const { API_ROOT } = require('../config');
 
 const API_ROUTER = express.Router();
 
@@ -33,9 +33,9 @@ const cors = require('cors');
 app.use(cors());
 
 // Passport authentication middleware
-let auth = require('./auth')(app);
+let auth = require('../auth')(app);
 const passport = require('passport');
-require('./passport');
+require('../passport');
 
 // Morgan middleware logging requests
 app.use(morgan('common'));
