@@ -2,7 +2,7 @@
   "name": "movie_api",
   "version": "1.0.0",
   "description": "",
-  "main": "functions/server.js",
+  "main": "functions/index.js",
   "scripts": {
     "build": "netlify-lambda build express",
     "start": "nodemon server-local.js"
