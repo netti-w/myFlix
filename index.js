@@ -44,6 +44,13 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 
 API_ROUTER
+
+  // ----------------------- Homepage -----------------------
+  .get('/', (req, res) => {
+    res.send('Welcome to my Movie database');
+  })
+
+  // ----------------------- Movie endpoints -----------------------
   /** 
    * GET the list of data about all movies
    * @returns an array of all movies objects in json format 
@@ -61,6 +68,38 @@ API_ROUTER
     Movies.findOne({ Title: req.params.Title })
       .then((movie) => {
         res.json(movie);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
+  })
+
+  /**
+   * GET data about a single movie by title
+   * @params {string} Title
+   * @returns a movie object in json format
+   */
+  .get('/movies/genres/:genreName', (req, res) => {
+    Movies.findOne({ "Genre.Name": req.params.genreName })
+      .then((movie) => {
+        res.json(movie.Genre);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
+  })
+
+  /**
+   * GET data about a director by name
+   * @params {string} directorName
+   * @returns a director object in json format
+   */
+  .get('/movies/directors/:directorName', (req, res) => {
+    Movies.findOne({ "Director.Name": req.params.directorName })
+      .then((movie) => {
+        res.json(movie.Director);
       })
       .catch((err) => {
         console.error(err);
