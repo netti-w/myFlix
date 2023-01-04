@@ -44,8 +44,11 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 
 API_ROUTER
+  // app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+  //   Movies.find().then(movies => res.json(movies));
+  // });
   .get('/movies', (req, res) => {
-    res.send('movies get hit')
+    Movies.find().then(movies => res.json(movies));
   })
   .post('/movies', (req, res) => {
     res.send('movies post hit')
