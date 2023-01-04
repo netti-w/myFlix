@@ -133,9 +133,6 @@ API_ROUTER
       });
   })
 
-  .post('/users', (req, res) => {
-    res.send('user post hit')
-  })
   /**
    * POST data creating a new user
    * @params {string} Username
