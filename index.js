@@ -133,6 +133,52 @@ API_ROUTER
       });
   })
 
+  /**
+   * POST data creating a new user
+   * @params {string} Username
+   * @params {string} Password
+   * @params {string} Email
+   * @returns a new user object in JSON format
+  */
+  .post('/users',
+    [
+      check('Username', 'Username is required (min. 5 characters)').isLength({ min: 5 }),
+      check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+      check('Password', 'Password is required').not().isEmpty(),
+      check('Email', 'Email does not appear to be valid').isEmail()
+    ], (req, res) => {
+      // check the validation object for errors
+      let errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+      }
+
+      let hashedPassword = Users.hashPassword(req.body.Password);
+      Users.findOne({ Username: req.body.Username })
+        .then((user) => {
+          if (user) {
+            return res.status(400).send(req.body.Username + ' already exists');
+          } else {
+            Users.create({
+              Username: req.body.Username,
+              Password: hashedPassword,
+              Email: req.body.Email,
+              Birthday: req.body.Birthday
+            })
+              .then((user) => { res.status(201).json(user) })
+              .catch((error) => {
+                console.error(error);
+                res.status(500).send('Error: ' + error);
+              })
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+        });
+    })
+
   .post('/movies', (req, res) => {
     res.send('movies post hit')
   })
