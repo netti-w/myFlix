@@ -44,12 +44,30 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 
 API_ROUTER
-  // app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
-  //   Movies.find().then(movies => res.json(movies));
-  // });
+  /** 
+   * GET the list of data about all movies
+   * @returns an array of all movies objects in json format 
+  */
   .get('/movies', (req, res) => {
     Movies.find().then(movies => res.json(movies));
   })
+
+  /**
+   * GET data about a single movie by title
+   * @params {string} Title
+   * @returns a movie object in json format
+  */
+  .get('/movies/:Title', (req, res) => {
+    Movies.findOne({ Title: req.params.Title })
+      .then((movie) => {
+        res.json(movie);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
+  })
+
   .post('/movies', (req, res) => {
     res.send('movies post hit')
   })
