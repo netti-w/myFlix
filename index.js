@@ -220,26 +220,65 @@ API_ROUTER
         });
     })
 
-  .post('/movies', (req, res) => {
-    res.send('movies post hit')
+  /**
+   * PUT data adding a user's favourite movie to a list
+   * @params {string} Username
+   * @params {string} MovieID
+   * @returns a new user object in JSON format
+   */
+  .put('/users/:Username/movies/:MovieID', (req, res) => {
+    Users.findOneAndUpdate({ Username: req.params.Username }, {
+      $push: { FavouriteMovies: req.params.MovieID }
+    },
+      { new: true }, // This line makes sure that the updated document is returned
+      (err, updatedUser) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+        } else {
+          res.json(updatedUser);
+        }
+      });
   })
-  .put('/movies', (req, res) => {
-    res.send('movies put hit')
+
+  /**
+   * DELETE data removing a user's favourite movie from the list
+   * @params {string} Username
+   * @params {string} MovieID
+   */
+  .delete('/users/:Username/movies/:MovieID', (req, res) => {
+    Users.findOneAndUpdate({ Username: req.params.Username }, {
+      $pull: { FavouriteMovies: req.params.MovieID }
+    },
+      { new: true }, // This line makes sure that the updated document is returned
+      (err, updatedUser) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+        } else {
+          res.json(updatedUser);
+        }
+      });
   })
-  .delete('/movies', (req, res) => {
-    res.send('movies delete hit')
-  })
-  .get('/users', (req, res) => {
-    res.send('user get hit')
-  })
-  // .post('/users', (req, res) => {
-  //   res.send('user post hit')
-  // })
-  .put('/users', (req, res) => {
-    res.send('user put hit')
-  })
-  .delete('/users', (req, res) => {
-    res.send('user delete hit')
+
+  /**
+   * DELETE data removing a user by user name
+   * @params {string} Username
+   * @returns success message
+   */
+  .delete('/users/:Username', (req, res) => {
+    Users.findOneAndRemove({ Username: req.params.Username })
+      .then((user) => {
+        if (!user) {
+          res.status(400).send(req.params.Username + ' was not found');
+        } else {
+          res.status(200).send(req.params.Username + ' was deleted.');
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
   })
 
 app.use(API_ROOT, API_ROUTER);
