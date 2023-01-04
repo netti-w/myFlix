@@ -44,7 +44,7 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 
 API_ROUTER
-  .get('/movies', (req, res) => {
+  .get('/.netlify/functions/server/movies', (req, res) => {
     res.send('movies get hit')
   })
   .post('/movies', (req, res) => {
